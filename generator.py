@@ -4,9 +4,9 @@ import math
 # Replace "/codes/py/test/" with the actual path
 directory_path = "codes/py/testok/"
 # Get a list of all PNG files in the directory
-png_files = [f for f in os.listdir(directory_path) if f.endswith(".jpg")]
+png_files = [f for f in os.listdir(directory_path) if f.endswith(".png")]
 if not png_files:
-    print("No jpg files found in the directory.")
+    print("No PNG files found in the directory.")
 else:
 # Create a list to store Image objects
     images = []
