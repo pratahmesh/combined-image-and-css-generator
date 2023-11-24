@@ -50,8 +50,11 @@ with open(css_sprite_path, "w") as css_file:
 
     for image in images:
         file_name = os.path.splitext(os.path.basename(image.filename))[0]
-        css_class = f".sprite-game.{file_name}\n"
-
+        css_class = f".sprite-game.{file_name}{{\n"
+        css_class += f"  width: {image.width}px;\n"
+        css_class += f"  height: {image.height}px;\n"
+        css_class += f"  background-position: {-current_x}px {-current_y}px;\n"
+        css_class += "}\n\n"
         css_file.write(css_class)
 
 print("CSS sprite file saved successfully.")
