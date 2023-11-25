@@ -41,12 +41,48 @@ else:
 
 #CSS sprite file
 css_sprite_path = os.path.join(directory_path, "sprite.css")
-with open(css_sprite_path, "w") as css_file:
-#CSS header
+    with open(css_sprite_path, "w") as css_file:
+    # Write common styles for all platforms
     css_file.write(".sprite-game {\n")
     css_file.write("  display: inline-block;\n")
-    css_file.write("  background-image: url('combined_grid_image.jpg');\n")
+    css_file.write(f"  background-image: url('{combined_image_path}');\n")
+    css_file.write("  background-size: 416px 384px;\n")
     css_file.write("}\n\n")
+
+    # Create CSS sprite file with media queries and individual class names
+    css_file.write(f'@media screen and (-webkit-min-device-pixel-ratio: 1), '
+                       f'screen and (-o-min-device-pixel-ratio: 100/100), '
+                       f'screen and (min-device-pixel-ratio: 1), '
+                       f'screen and (-o-min-device-pixel-ratio: 1/1), '
+                       f'screen and (min-resolution: 1dppx) {{\n')
+        css_file.write(f'  .sprite-games {{\n')
+        css_file.write(f'    background-image: url("combined_grid_image.jpg");\n')
+        css_file.write(f'    background-size: {grid_width}px {grid_height}px;\n')
+        css_file.write("  }\n}\n\n")
+
+    # Write platform-specific styles for 2x resolution
+    css_file.write("@media screen and (-webkit-min-device-pixel-ratio: 2),\n")
+    css_file.write("  screen and (-o-min-device-pixel-ratio: 200/100),\n")
+    css_file.write("  screen and (min-device-pixel-ratio: 2),\n")
+    css_file.write("  screen and (-o-min-device-pixel-ratio: 2/1),\n")
+    css_file.write("  screen and (min-resolution: 2dppx) {\n")
+    css_file.write("  .sprite-game {\n")
+    css_file.write(f"    background-image: url('../..//images/games@2x.png');\n")
+    css_file.write("  }\n")
+    css_file.write("}\n\n")
+
+    # Write platform-specific styles for other platforms
+    css_file.write("@media screen and (-webkit-min-device-pixel-ratio: /* platform ratio */),\n")
+    css_file.write("  screen and (-o-min-device-pixel-ratio: /* platform ratio/100 */),\n")
+    css_file.write("  screen and (min-device-pixel-ratio: /* platform ratio */),\n")
+    css_file.write("  screen and (-o-min-device-pixel-ratio: /* platform ratio/1 */),\n")
+    css_file.write("  screen and (min-resolution: /* platform resolution */dppx) {\n")
+    css_file.write("  .sprite-game {\n")
+    css_file.write(f"    background-image: url('../..//images/other-platform.png');\n")
+    css_file.write("    /* Additional styles for other platforms */\n")
+    css_file.write("  }\n")
+    css_file.write("}\n\n")
+
 
     for image in images:
         file_name = os.path.splitext(os.path.basename(image.filename))[0]
