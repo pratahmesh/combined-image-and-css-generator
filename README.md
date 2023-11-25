@@ -31,10 +31,10 @@ The script performs the following steps:
 
 3. Important note
 
-Just Replace the value of `directory_path` with the actual path of your directory containing Images 
-   ```python
+- Just Replace the value of `directory_path` with the actual path of your directory containing Images 
+```python
    directory_path = "codes/py/testok/"
 ```
-It supports .jpg , .png , .jpeg files for now
+- It supports .jpg , .png , .jpeg files for now
 
 
