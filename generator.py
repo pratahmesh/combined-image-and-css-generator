@@ -45,7 +45,7 @@ css_sprite_path = os.path.join(directory_path, "sprite.css")
     # Write common styles for all platforms
     css_file.write(".sprite-game {\n")
     css_file.write("  display: inline-block;\n")
-    css_file.write(f"  background-image: url('{combined_image_path}');\n")
+    css_file.write(f"  background-image: url("combined_grid_image.png");\n')
     css_file.write("  background-size: 416px 384px;\n")
     css_file.write("}\n\n")
 
@@ -56,7 +56,7 @@ css_sprite_path = os.path.join(directory_path, "sprite.css")
                        f'screen and (-o-min-device-pixel-ratio: 1/1), '
                        f'screen and (min-resolution: 1dppx) {{\n')
         css_file.write(f'  .sprite-games {{\n')
-        css_file.write(f'    background-image: url("combined_grid_image.jpg");\n')
+        css_file.write(f'    background-image: url("combined_grid_image.png");\n')
         css_file.write(f'    background-size: {grid_width}px {grid_height}px;\n')
         css_file.write("  }\n}\n\n")
 
@@ -67,7 +67,7 @@ css_sprite_path = os.path.join(directory_path, "sprite.css")
     css_file.write("  screen and (-o-min-device-pixel-ratio: 2/1),\n")
     css_file.write("  screen and (min-resolution: 2dppx) {\n")
     css_file.write("  .sprite-game {\n")
-    css_file.write(f"    background-image: url('../..//images/games@2x.png');\n")
+    css_file.write(f"    background-image: url("combined_grid_image.png");\n')
     css_file.write("  }\n")
     css_file.write("}\n\n")
 
