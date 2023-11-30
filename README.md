@@ -29,12 +29,22 @@ The script performs the following steps:
    ```bash
    pip install pillow
 
-3. Important note
+3. **Command Line Usage:**
+   ```bash
+   python script.py <directory_path> <base_name> <produce_2x>
+`
+  - <directory_path>: Path to the directory containing images.
+  - <base_name>: Base name for the output files.
+  - <produce_2x>: 0 for normal image, 1 for 2x image.
+ 
 
-- Just Replace the value of `directory_path` with the actual path of your directory containing Images 
-```python
-   directory_path = "codes/py/testok/"
+**Example** 
+```bash
+python script.py "root/py/test" "output" 1
 ```
-- It supports .jpg , .png , .jpeg files for now
+Output:
+Combined grid image: output.png
+2x Combined grid image: output@2x.png
+CSS sprite file: output.css
 
-
+**It supports .jpg , .png , .jpeg files for now**
