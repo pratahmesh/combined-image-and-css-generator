@@ -32,7 +32,7 @@ The script performs the following steps:
 
 3. **Command Line Usage:**
    ```
-   python script.py <directory_path> <base_name> <produce_2x>
+   python generator.py <directory_path> <base_name> <produce_2x>
    ```
   - <directory_path>: Path to the directory containing images.
   - <base_name>: Base name for the output files.
@@ -41,7 +41,7 @@ The script performs the following steps:
 
 **Example** 
 ```bash
-python script.py "root/py/test" "output" 1
+python generator.py "root/py/test" "output" 1
 ```
 This command generates a combined image, a 2x version (if specified), and a CSS sprite using images from the specified directory with the base name "output" Adjust the arguments based on your directory and naming preferences.
 
