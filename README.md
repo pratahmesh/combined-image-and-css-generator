@@ -30,9 +30,9 @@ The script performs the following steps:
    pip install pillow
 
 3. **Command Line Usage:**
-   ```bash
+   ```
    python script.py <directory_path> <base_name> <produce_2x>
-`
+   ```
   - <directory_path>: Path to the directory containing images.
   - <base_name>: Base name for the output files.
   - <produce_2x>: 0 for normal image, 1 for 2x image.
@@ -42,9 +42,11 @@ The script performs the following steps:
 ```bash
 python script.py "root/py/test" "output" 1
 ```
+This command generates a combined image, a 2x version (if specified), and a CSS sprite using images from the specified directory with the base name "output" Adjust the arguments based on your directory and naming preferences.
+
 Output:
-Combined grid image: output.png
-2x Combined grid image: output@2x.png
-CSS sprite file: output.css
+- Combined grid image: output.png
+- 2x Combined grid image: output@2x.png
+- CSS sprite file: output.css
 
 **It supports .jpg , .png , .jpeg files for now**
