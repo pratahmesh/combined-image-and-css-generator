@@ -24,6 +24,7 @@ The script performs the following steps:
 1. **Requirements:**
    - Python 3.x
    - PIL (Python Imaging Library)
+   - It supports .jpg , .png , .jpeg files for now
 
 2. **Installation:**
    ```bash
@@ -48,5 +49,3 @@ Output:
 - Combined grid image: output.png
 - 2x Combined grid image: output@2x.png
 - CSS sprite file: output.css
-
-**It supports .jpg , .png , .jpeg files for now**
