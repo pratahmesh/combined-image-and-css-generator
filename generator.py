@@ -3,38 +3,30 @@ import os
 import math
 import sys
 
-# Move these declarations outside the function
-css_sprite_path = None
-combined_image_path = None
-combined_image_2x_path = None
 
 def create_combined_image(directory_path, base_name, produce_2x):
-    global css_sprite_path, combined_image_path, combined_image_2x_path
-    
+    # Get a list of all PNG files in the directory
     png_files = [f for f in os.listdir(directory_path) if f.endswith(".png")]
-
     if not png_files:
         print("No PNG files found in the directory.")
         return
 
+    # Create a list to store Image objects
     images = []
-    min_dimension = float('inf')  # Initialize with a large value
 
+    # Open each PNG file and append it to the list
     for png_file in png_files:
         file_path = os.path.join(directory_path, png_file)
         image = Image.open(file_path)
         images.append(image)
-        
-        # Update the minimum dimension
-        min_dimension = min(min_dimension, min(image.width, image.height))
 
     total_images = len(images)
     rows = int(math.sqrt(total_images))
     columns = math.ceil(total_images / rows)
 
     # Calculate the dimensions of each cell in the grid
-    cell_width = min_dimension
-    cell_height = min_dimension
+    cell_width = max(image.width for image in images)
+    cell_height = max(image.height for image in images)
 
     # Create a new blank image with the calculated dimensions for the grid
     grid_width = columns * cell_width
@@ -45,9 +37,6 @@ def create_combined_image(directory_path, base_name, produce_2x):
     current_x = 0
     current_y = 0
     for image in images:
-        # Downscale the image if its dimension is greater than min_dimension
-        if image.width > min_dimension or image.height > min_dimension:
-            image = image.resize((min_dimension, min_dimension), Image.ANTIALIAS)
         combined_image.paste(image, (current_x, current_y))
         current_x += cell_width
         if current_x >= grid_width:
@@ -61,10 +50,26 @@ def create_combined_image(directory_path, base_name, produce_2x):
 
     # Save the 2x image if requested
     if produce_2x:
+        # Resize each 2x image individually
+        resized_images_2x = [image.resize((cell_width // 2, cell_height // 2), Image.ANTIALIAS) for image in images]
+
+        # Create a new blank image with the calculated dimensions for the 2x grid
+        grid_width_2x = columns * (cell_width // 2)
+        grid_height_2x = rows * (cell_height // 2)
+        combined_image_2x = Image.new("RGB", (grid_width_2x, grid_height_2x), (255, 255, 255))
+
+        # Paste each 2x image onto the combined 2x image in a grid pattern
+        current_x = 0
+        current_y = 0
+        for image_2x in resized_images_2x:
+            combined_image_2x.paste(image_2x, (current_x, current_y))
+            current_x += cell_width // 2
+            if current_x >= grid_width_2x:
+                current_x = 0
+                current_y += cell_height // 2
+
+        # Save the 2x combined image
         combined_image_2x_path = os.path.join(directory_path, f"{base_name}@2x.png")
-        combined_image_2x = combined_image.resize(
-            (cell_width * columns // 2, cell_height * rows // 2), Image.ANTIALIAS
-        )
         combined_image_2x.save(combined_image_2x_path)
         print(f"2x Combined grid image saved successfully at {combined_image_2x_path}.")
 
